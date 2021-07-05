@@ -169,7 +169,7 @@ namespace Критический_Путь_Экзамен_Болдин
             return maxind;
         }
         /// <summary>
-        /// Метод построения пути
+        /// Метод построения пути.
         /// </summary>
         /// <param name="Start"></param>
         /// <param name="minel"></param>
