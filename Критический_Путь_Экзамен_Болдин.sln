@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Критический_Пу
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{D59C8C95-8769-4E3E-9018-057577050B09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML-Решение ММ", "UML-Решение ММ", "{1501EE16-3157-4306-8088-7A054DA6FF24}"
+	ProjectSection(SolutionItems) = preProject
+		..\Диаграммы_Болдин.vsdx = ..\Диаграммы_Болдин.vsdx
+		..\Решение Болдин.docx = ..\Решение Болдин.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

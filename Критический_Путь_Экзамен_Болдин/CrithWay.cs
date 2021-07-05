@@ -12,17 +12,21 @@ namespace Критический_Путь_Экзамен_Болдин
 {
     public class CrithWay
     {
-        string s = "";
+        public string s = "";
+        /// <summary>
+        /// Метод проведения диалога
+        /// </summary>
+        /// <returns></returns>
         [STAThread]
         static string Dialog()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.FileName = "Document";
+            dlg.FileName = "";
             dlg.DefaultExt = ".csv";
             dlg.Filter = "CSV documents (.csv)|*.csv";
             dlg.ShowDialog();
             return dlg.FileName;
-            if (dlg.FileName == "Document")
+            if (dlg.FileName == "")
             {
                 MessageBox.Show("Вы не указали файл");
                 Environment.Exit(0);
@@ -91,7 +95,6 @@ namespace Критический_Путь_Экзамен_Болдин
             }
             Debug.WriteLine("Максимум " + max);
             Debug.WriteLine("Номер максимума " + maxind);
-            //Debug.Fail("Продолжить?");
             MessageBox.Show("Выбери файл выходных данных");
             Output(ListWayLength, maxind, max, Dialog());///Запись в файл решения
             Debug.Listeners.Clear();
@@ -152,7 +155,7 @@ namespace Критический_Путь_Экзамен_Болдин
         /// </summary>
         /// <param name="Start"></param>
         /// <returns></returns>
-        public int MaxElem(List<Rastoyanie> Start)
+        public int MaxPoint(List<Rastoyanie> Start)
         {
             int min = Start[0].point2, maxind = 0;
             foreach (Rastoyanie Path in Start)
@@ -176,7 +179,7 @@ namespace Критический_Путь_Экзамен_Болдин
             int Lenght = 0;
             Rastoyanie Movements = Start.Find(x => x.point1 == minel.point1 && x.point2 == minel.point2);//Поиск возможных вариантов передвижения
             s += Movements.point1.ToString() + "-" + Movements.point2.ToString();//Пишем передвижение
-            if (Movements.point2 == Start[MaxElem(Start)].point2)//Смотрим не в конце ли мы
+            if (Movements.point2 == Start[MaxPoint(Start)].point2)//Смотрим не в конце ли мы
             {
                 s += ";";
                 return Movements.length;
