@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Критический_Путь_Экзамен_Болдин
 {
-    class Program
+    class CrithWay
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }
