@@ -1,17 +1,33 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Критический_Путь_Экзамен_Болдин
 {
     public class CrithWay
     {
         string s = "";
-
+        [STAThread]
+        static string Dialog()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.FileName = "Document";
+            dlg.DefaultExt = ".csv";
+            dlg.Filter = "CSV documents (.csv)|*.csv";
+            dlg.ShowDialog();
+            return dlg.FileName;
+            if (dlg.FileName == "Document")
+            {
+                MessageBox.Show("Вы не указали файл");
+                Environment.Exit(0);
+            }
+        }
         /// <summary>
         /// Структура, содержащая все пути и расстояние между ними
         /// </summary>
@@ -29,7 +45,7 @@ namespace Критический_Путь_Экзамен_Болдин
         /// Метод ввода данных в программу из csv-файла
         /// </summary>
         /// <returns></returns>
-        public List<Rastoyanie> Input()
+        public List<Rastoyanie> Input(string path)
         {
 
             List<Rastoyanie> Start = new List<Rastoyanie>();
@@ -53,7 +69,8 @@ namespace Критический_Путь_Экзамен_Болдин
         public void Work()
         {
             List<Rastoyanie> ListWay;//лист путей
-            List<Rastoyanie> Start = Input();//лист исходных данных 
+            MessageBox.Show("Выбери файл входных данных");
+            List<Rastoyanie> Start = Input(Dialog());//лист исходных данных 
             Log(Start);
             ListWay = Start.FindAll(x => x.point1 == Start[MinPoint(Start)].point1);//запись точки начала в лист путей
             List<List<Rastoyanie>> ListWayLength = new List<List<Rastoyanie>>();//лист путей и функций
@@ -75,7 +92,8 @@ namespace Критический_Путь_Экзамен_Болдин
             Debug.WriteLine("Максимум " + max);
             Debug.WriteLine("Номер максимума " + maxind);
             //Debug.Fail("Продолжить?");
-            Output(ListWayLength, maxind, max);///Запись в файл решения
+            MessageBox.Show("Выбери файл выходных данных");
+            Output(ListWayLength, maxind, max, Dialog());///Запись в файл решения
             Debug.Listeners.Clear();
         }
 
@@ -86,7 +104,7 @@ namespace Критический_Путь_Экзамен_Болдин
         /// <param name="ListWayLength"></param>
         /// <param name="maxind"></param>
         /// <param name="max"></param>
-        public void Output(List<List<Rastoyanie>> ListWayLength, int maxind, int max)
+        public void Output(List<List<Rastoyanie>> ListWayLength, int maxind, int max,string path)
         {
             using (StreamWriter sr = new StreamWriter(@"Output.csv", false, Encoding.Default, 10))//Output-csv-файл, в который записывается окончательное решение
             {

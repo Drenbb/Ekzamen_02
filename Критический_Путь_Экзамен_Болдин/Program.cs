@@ -10,6 +10,7 @@ namespace Критический_Путь_Экзамен_Болдин
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             Debug.Listeners.Add(new TextWriterTraceListener(File.CreateText("Log-file.txt")));
